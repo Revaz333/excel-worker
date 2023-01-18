@@ -1,0 +1,20 @@
+version: '3.9'
+
+services:
+  golang:
+    build: ./
+    container_name: golang
+    restart: always
+    # stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    volumes:
+      - ./:/go/tmp/src
+    networks:
+      - golang
+networks:
+  golang:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.100.11.0/24
