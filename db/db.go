@@ -1,10 +1,10 @@
 package db
 
 import (
+	"database/sql"
 	"fmt"
 
-	"gorm.io/driver/mysql"
-	"gorm.io/gorm"
+	_ "github.com/go-sql-driver/mysql"
 )
 
 type Config struct {
@@ -15,17 +15,17 @@ type Config struct {
 	Dbpassword string
 }
 
-var db *gorm.DB
+var db *sql.DB
 
-func NewDb(config Config) (*gorm.DB, error) {
+func NewDb(config Config) (*sql.DB, error) {
 	if db != nil {
 		return db, nil
 	}
 	dsn := fmt.Sprintf(
-		"%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local",
+		"%s:%s@tcp(%s:%s)/%s",
 		config.Dbuser, config.Dbpassword, config.Host, config.Port, config.Dbname)
 
-	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	db, err := sql.Open("mysql", dsn)
 
 	if err != nil {
 		return nil, err

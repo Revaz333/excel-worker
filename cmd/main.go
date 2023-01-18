@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"worker/db"
 	"worker/internal/controllers"
+	"worker/internal/helpers"
 
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
@@ -28,7 +29,10 @@ func main() {
 		logrus.Fatalf("Something go wrong while connect to Db(")
 	}
 
-	controller := controllers.QueueController{db}
+	dbHelpers := helpers.Db{db}
+	arrHelpers := helpers.Arrays{}
+	xlHelpers := helpers.Exel{}
+	controller := controllers.QueueController{dbHelpers, arrHelpers, xlHelpers}
 
 	res, err := controller.CheckQueue()
 
