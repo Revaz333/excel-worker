@@ -9,4 +9,5 @@ type WorkerQueues struct {
 	TableName string
 	Status    sql.NullString
 	Error     sql.NullString
+	Columns   string
 }
