@@ -1,6 +1,0 @@
-db:
-  host: "10.100.11.1"
-  port: "3306"
-  name: "srdo"
-  user: "root"
-  password: "5dYrdPBsTZ"
