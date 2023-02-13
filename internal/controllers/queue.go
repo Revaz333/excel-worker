@@ -235,7 +235,7 @@ func (c QueueController) BuildUpdate(
 		for i, field := range val {
 			if strings.Index(types[i], "date") != -1 && field == "" {
 				sqlVal = append(sqlVal, fmt.Sprintf("%s = %v", columns[i], "CURRENT_TIMESTAMP"))
-			} else if field == "" {
+			} else if field == "" || len(strings.TrimSpace(field)) == 0 {
 				sqlVal = append(sqlVal, fmt.Sprintf("%s = %v", columns[i], "NULL"))
 			} else {
 				sqlVal = append(sqlVal, fmt.Sprintf("%s = %v", columns[i], "'"+strings.Replace(field, "'", "", -1)+"'"))
